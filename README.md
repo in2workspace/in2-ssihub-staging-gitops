@@ -124,7 +124,7 @@ kubectl get applications -n argocd
 
 # Setup External DNS Ionos Webhook
 
-Follow the steps in: [README.md](doc%2Fexternal-dns-ionos-webhook%2FREADME.md)
+Follow the steps in: [README.md](doc/external-dns-ionos-webhook/README.md)
 
 # ArgoCD
 
