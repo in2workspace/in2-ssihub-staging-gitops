@@ -1,0 +1,5 @@
+dome:
+  env: in2-ssihub-staging
+  dnsName: ssihub.org
+  maintainer:
+    email: domesupport@in2.es
