@@ -1,0 +1,26 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: argocd-server-ingress
+  namespace: argocd
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-in2-ssihub-staging-issuer
+    nginx.ingress.kubernetes.io/ssl-passthrough: "true"
+    nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: staging.argocd.ssihub.org
+    http:
+      paths:
+        - path: /
+          pathType: Prefix
+          backend:
+            service:
+              name: argocd-server
+              port:
+                name: https
+  tls:
+    - hosts:
+      - staging.argocd.ssihub.org
+      secretName: in2-dev-tls
