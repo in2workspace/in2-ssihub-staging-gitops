@@ -4,16 +4,16 @@ metadata:
   name: trusted-issuers-list
   namespace: argocd
   labels:
-    purpose: iam
+    purpose: ssi
 spec:
   project: default
   source:
     repoURL: https://github.com/in2workspace/in2-ssihub-staging-gitops
     targetRevision: HEAD
-    path: charts/iam/trusted-issuers-list
+    path: charts/til/trusted-issuers-list
   destination:
     server: https://kubernetes.default.svc
-    namespace: iam
+    namespace: ssi
   syncPolicy:
     automated:
       prune: true

@@ -1,19 +1,19 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: mysql
+  name: mysql-til
   namespace: argocd
   labels:
-    purpose: iam
+    purpose: ssi
 spec:
   project: default
   source:
     repoURL: https://github.com/in2workspace/in2-ssihub-staging-gitops
     targetRevision: HEAD
-    path: charts/iam/mysql
+    path: charts/til/mysql
   destination:
     server: https://kubernetes.default.svc
-    namespace: iam
+    namespace: ssi
   syncPolicy:
     automated:
       prune: true
