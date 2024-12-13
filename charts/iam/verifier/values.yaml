@@ -1,0 +1,50 @@
+verifier-api:
+  image:
+    repository: in2workspace/in2-verifier-api
+    tag: v1.0.15-snapshot
+    pullPolicy: Always
+
+  ingress:
+    enabled: true
+    className: nginx
+    annotations:
+      cert-manager.io/cluster-issuer: letsencrypt-in2-ssihub-staging-issuer
+    hosts:
+      - host: staging.verifier.ssihub.org
+        paths:
+            - path: /
+              pathType: Prefix
+    tls:
+      - hosts:
+          - staging.verifier.ssihub.org
+        secretName: verifier-tls-sec
+
+  app:
+    profile: local
+    logLevel:
+        app: DEBUG
+    externalDomain: "https://staging.verifier.ssihub.org"
+    accessToken:
+      expirationUnitTime: MINUTES
+      expirationTime: 30
+    idToken:
+      expirationUnitTime: MINUTES
+      expirationTime: 5
+    loginQrCode:
+      expirationUnitTime: MINUTES
+      expirationTime: 2
+    clientsRepository:
+      uri: "https://raw.githubusercontent.com/in2workspace/in2-ssihub-staging-gitops/refs/heads/main/trust-framework/trusted_services_list.yaml"
+    trustedIssuerList:
+      uri: "http://trusted-issuers-list.marketplace.svc.cluster.local:8080/v4/issuers/"
+    revocationList:
+      uri: "https://raw.githubusercontent.com/in2workspace/in2-ssihub-staging-gitops/refs/heads/main/trust-framework/revoked_credential_list.yaml"
+    privateKey:
+      existingSecret:
+        enabled: true
+        name: verifier-secret
+        key: private-key
+    verifierUiLoginUris:
+      onboardingUri: "https://knowledgebase.dome-marketplace.org/shelves/company-onboarding-process"
+      supportUri: "https://ticketing.dome-marketplace.org"
+      walletUri: "https://staging.wallet.ssihub.org"
