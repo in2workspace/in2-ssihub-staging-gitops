@@ -1,0 +1,11 @@
+clients:
+  - clientId: "did:key:zDnaeoD9iHw6uoHMU9haCP9fjU3MJJWzk5xf61Awknw5ZbwGa"
+    redirectUris: []
+    scopes: []
+    clientAuthenticationMethods: ["client_secret_jwt"]
+    authorizationGrantTypes: ["client_credentials"]
+    postLogoutRedirectUris: []
+    requireAuthorizationConsent: false
+    requireProofKey: false
+    jwkSetUrl: "https://staging.verifier.ssihub.org/oidc/did/did:key:zDnaeoD9iHw6uoHMU9haCP9fjU3MJJWzk5xf61Awknw5ZbwGa"
+    tokenEndpointAuthenticationSigningAlgorithm: "ES256"

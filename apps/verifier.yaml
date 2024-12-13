@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: verifier-api
+  namespace: argocd
+  labels:
+    purpose: ssi
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/in2workspace/in2-ssihub-staging-gitops
+    targetRevision: HEAD
+    path: charts/verifier
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: ssi
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
