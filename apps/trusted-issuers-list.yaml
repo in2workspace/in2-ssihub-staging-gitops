@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: trusted-issuers-list
+  namespace: argocd
+  labels:
+    purpose: iam
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/in2workspace/in2-ssihub-staging-gitops
+    targetRevision: HEAD
+    path: charts/iam/trusted-issuers-list
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: iam
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
