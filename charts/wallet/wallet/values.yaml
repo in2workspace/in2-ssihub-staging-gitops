@@ -197,8 +197,6 @@ wallet:
     auth:
       # -- username to be used
       username: postgres
-      # -- password to be used
-      password: postgres
       # -- should the default postgres user be enabled
       enablePostgresUser: true
       # -- existing secret
@@ -267,8 +265,6 @@ wallet:
     auth:
       # -- username to be used
       username: postgres
-      # -- password to be used
-      password: postgres
       # -- should the default postgres user be enabled
       enablePostgresUser: true
       # -- existing secret
