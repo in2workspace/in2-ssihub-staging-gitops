@@ -19,7 +19,7 @@ wallet:
       hosts:
         - host: staging.wallet.ssihub.org
           paths:
-            - path: /api
+            - path: /wallet-api
               pathType: Prefix
       tls:
         - hosts:
@@ -30,7 +30,7 @@ wallet:
       profile: prod
       internalServerPort: 8080
       logLevel: INFO
-      basePath: /api
+      basePath: /wallet-api
       authServer:
         external:
           scheme: https
