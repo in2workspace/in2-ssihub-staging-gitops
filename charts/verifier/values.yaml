@@ -1,7 +1,7 @@
 verifier-api:
   image:
     repository: in2workspace/in2-verifier-api
-    tag: v1.0.15-snapshot
+    tag: v1.0.13
     pullPolicy: Always
 
   ingress:
@@ -12,21 +12,19 @@ verifier-api:
     hosts:
       - host: staging.verifier.ssihub.org
         paths:
-            - path: /
-              pathType: Prefix
+          - path: /
+            pathType: Prefix
     tls:
       - hosts:
           - staging.verifier.ssihub.org
         secretName: verifier-tls-sec
 
   app:
-    profile: local
-    logLevel:
-        app: DEBUG
+    profile: prod
     externalDomain: "https://staging.verifier.ssihub.org"
     accessToken:
-      expirationUnitTime: MINUTES
-      expirationTime: 30
+      expirationUnitTime: DAYS
+      expirationTime: 1
     idToken:
       expirationUnitTime: MINUTES
       expirationTime: 5
