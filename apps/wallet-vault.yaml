@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: wallet-vault
+  namespace: argocd
+  labels:
+    purpose: ssi
+spec:
+  destination:
+    namespace: ssi
+    server: https://kubernetes.default.svc
+  project: default
+  source:
+    path: charts/wallet/vault
+    repoURL: https://github.com/in2workspace/in2-ssihub-staging-gitops
+    targetRevision: HEAD
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
