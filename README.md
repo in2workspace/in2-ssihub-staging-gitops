@@ -126,6 +126,14 @@ kubectl get applications -n argocd
 
 Follow the steps in: [README.md](doc/external-dns-ionos-webhook/README.md)
 
+> [!NOTE]
+> Steps to deploy successful Ingress and External DNS are in the next sections:
+> 1. Nginx config
+> 2. Configure IP in Ionos domain manager tool
+> 3. Create subdomains in that tool
+> 4. Configure external DNS
+> 5. Create / recreate ingress resources
+
 # ArgoCD
 
 ## 1. Get your ArgoCD Admin Password
