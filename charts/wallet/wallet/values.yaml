@@ -117,9 +117,9 @@ wallet:
       internalServerPort: 8080
       walletApi:
         # Este internalDomain es en realidad el external
-        internalDomain: https://staging.wallet.ssihub.org/api
+        internalDomain: https://staging.wallet.ssihub.org/wallet-api
         # ws = sin certificado, wss = con certificado
-        websocketExternalDomain: wss://staging.wallet.ssihub.org/api
+        websocketExternalDomain: wss://staging.wallet.ssihub.org/wallet-api
       iam:
         external_domain: https://staging.wallet.ssihub.org/keycloak
 
