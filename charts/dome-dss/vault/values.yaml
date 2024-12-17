@@ -1,5 +1,5 @@
 vaultPodName: dome-dss-vault-server-0
-namespace: in2
+namespace: ssi
 unsealSecretName: dome-dss-vault-unseal-secret
 vault:
   fullnameOverride: dome-dss-vault
