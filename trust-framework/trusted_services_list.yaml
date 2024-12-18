@@ -9,7 +9,7 @@ clients:
     requireProofKey: false
     jwkSetUrl: "https://staging.verifier.ssihub.org/oidc/did/did:key:zDnaeoD9iHw6uoHMU9haCP9fjU3MJJWzk5xf61Awknw5ZbwGa"
     tokenEndpointAuthenticationSigningAlgorithm: "ES256"
-  - clientId: "issuer-ssihub"
+  - clientId: "issuer-dome"
     url: "https://staging.issuer.ssihub.org"
     redirectUris: [ "https://staging.issuer.ssihub.org/issuer-keycloak/realms/issuer-dome/broker/vc/endpoint" ]
     scopes: [ "openid_learcredential" ]
