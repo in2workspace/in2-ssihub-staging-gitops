@@ -26,7 +26,7 @@ issuer:
       className: nginx
       annotations:
         cert-manager.io/cluster-issuer: letsencrypt-in2-ssihub-staging-issuer
-        nginx.ingress.kubernetes.io/rewrite-target: /issuer-keycloak/realms/CredentialIssuer/verifiable-credential/did:key:z6MkqmaCT2JqdUtLeKah7tEVfNXtDXtQyj4yxEgV11Y5CqUa/.well-known/openid-configuration
+        nginx.ingress.kubernetes.io/rewrite-target: /issuer-keycloak/realms/issuer-dome/verifiable-credential/did:key:z6MkqmaCT2JqdUtLeKah7tEVfNXtDXtQyj4yxEgV11Y5CqUa/.well-known/openid-configuration
       hosts:
         - host: staging.issuer.ssihub.org
           paths:
@@ -38,26 +38,26 @@ issuer:
         - hosts:
             - staging.issuer.ssihub.org
           secretName: issuer-secret-tls
-      ingressToken:
-        enabled: true
-        className: nginx
-        annotations:
-          cert-manager.io/cluster-issuer: letsencrypt-in2-ssihub-staging-issuer
-          nginx.ingress.kubernetes.io/rewrite-target: /issuer-keycloak/realms/CredentialIssuer/verifiable-credential/did:key:z6MkqmaCT2JqdUtLeKah7tEVfNXtDXtQyj4yxEgV11Y5CqUa/token
-        hosts:
-          - host: staging.issuer.ssihub.org
-            paths:
-              - path: /issuer-api/token
-                pathType: Prefix
-                serviceName: dome-issuer-keycloak
-                servicePort: 8080
-        tls:
-          - hosts:
-              - staging.issuer.ssihub.org
-            secretName: issuer-secret-tls
+    ingressToken:
+      enabled: true
+      className: nginx
+      annotations:
+        cert-manager.io/cluster-issuer: letsencrypt-in2-ssihub-staging-issuer
+        nginx.ingress.kubernetes.io/rewrite-target: /issuer-keycloak/realms/issuer-dome/verifiable-credential/did:key:z6MkqmaCT2JqdUtLeKah7tEVfNXtDXtQyj4yxEgV11Y5CqUa/token
+      hosts:
+        - host: staging.issuer.ssihub.org
+          paths:
+            - path: /issuer-api/token
+              pathType: Prefix
+              serviceName: dome-issuer-keycloak
+              servicePort: 8080
+      tls:
+        - hosts:
+            - staging.issuer.ssihub.org
+          secretName: issuer-secret-tls
     app:
       profile: default
-      logLevel: DEBUG
+      logLevel: INFO
       internalServerPort: 8080
       mail:
         host: smtp.ionos.de
@@ -111,17 +111,17 @@ issuer:
           internalPort: 30002
           path: /issuer-keycloak
         internalDomain: http://dome-issuer-keycloak:8080/issuer-keycloak
-        realm: CredentialIssuer
+        realm: issuer-dome
         client:
-          clientId: oidc4vci-wallet-client
-          username: user
+          clientId: issuer-api-client
+          username: issuer-api-user
           existingSecret:
             enabled: true
             name: issuer-secret
             clientSecretKey: authServerClientSecret
             clientPasswordKey: authServerClientPassword
         paths:
-          tokenPath: /realms/CredentialIssuer/protocol/openid-connect/token
+          tokenPath: /realms/issuer-dome/protocol/openid-connect/token
       ui:
         externalDomain:
           # if deployed locally set to false
@@ -154,7 +154,7 @@ issuer:
     image:
       repository: in2workspace/in2-issuer-ui
       # Overrides the image tag whose default is the chart appVersion.
-      tag: v1.1.6
+      tag: v1.2.3
       pullPolicy: Always
     ingress:
       enabled: true
@@ -180,9 +180,9 @@ issuer:
         host: staging.issuer.ssihub.org
         # internalPort is only used if externalService is false
         internalPort: 30002
-        path: /issuer-keycloak/realms/CredentialIssuer
-      clientId: account-console
-      scope: openid profile email offline_access
+        path: /issuer-keycloak/realms/issuer-dome
+      clientId: vc-auth-client
+      scope: openid profile email offline_access vc mandator
       grantType: code
       baseUrl:
         # if deployed locally set to false
@@ -211,6 +211,7 @@ issuer:
         # internalPort is only used if externalService is false
         internalPort: 30004
         path: /
+      profile: dev
       procedures: /api/v1/procedures
       saveCredential: /api/v1/credentials?type=LEARCredentialEmployee
       credentialOfferUrl: /api/v1/credential-offer
